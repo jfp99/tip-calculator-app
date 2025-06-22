@@ -65,6 +65,8 @@ body {
   color: hsl(183, 100%, 15%);
   text-align: right;
   font-size: 24px;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
 }
 .bill-input input::-moz-placeholder {
   color: hsl(184, 14%, 56%);
@@ -113,6 +115,7 @@ button {
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: "Space Mono", monospace;
 }
 button:hover {
   background-color: hsl(173, 61%, 77%);
@@ -129,23 +132,26 @@ button.active {
   text-align: center;
   border: none;
   border-radius: 8px;
+  font-family: "Space Mono", monospace;
 }
 .custom-tip::-moz-placeholder {
   color: hsl(184, 14%, 56%);
-  font-size: 24px;
   font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Space Mono", monospace;
 }
 .custom-tip::placeholder {
   color: hsl(184, 14%, 56%);
-  font-size: 24px;
   font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Space Mono", monospace;
 }
 
 .people-input {
   position: relative;
 }
 .people-input input {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   width: 100%;
   font-size: 24px;
   text-align: right;
@@ -153,6 +159,16 @@ button.active {
   border: none;
   border-radius: 8px;
   color: hsl(183, 100%, 15%);
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+}
+.people-input input::-moz-placeholder {
+  color: hsl(183, 100%, 15%);
+  font-weight: 700;
+}
+.people-input input::placeholder {
+  color: hsl(183, 100%, 15%);
+  font-weight: 700;
 }
 
 .output-section {
