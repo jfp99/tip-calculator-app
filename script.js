@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // State
     let billValue = 0;
     let tipValue = 0.15; // Default to 15%
-    let peopleValue = 2; // Default to 5 people as in your design
+    let peopleValue = 2;
 
     // Initialize
     function initCalculator() {
