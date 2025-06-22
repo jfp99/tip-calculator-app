@@ -1,1 +1,206 @@
-/*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+body {
+  font-family: "Space Mono", monospace;
+  background-color: hsl(185, 41%, 84%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  flex-direction: column;
+}
+
+.calculator {
+  background-color: hsl(0, 100%, 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+.calculator:hover {
+  transform: scale(1.01);
+}
+@media (max-width: 768px) {
+  .calculator {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: hsl(183, 100%, 15%);
+  letter-spacing: 0.5rem;
+  line-height: 1.2;
+  transition: transform 0.3s;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.input-section label {
+  color: hsl(186, 14%, 43%);
+  font-weight: 700;
+}
+
+.bill-input {
+  position: relative;
+}
+.bill-input input {
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  background-color: hsl(189, 47%, 97%);
+  border: none;
+  border-radius: 8px;
+  color: hsl(183, 100%, 15%);
+  text-align: right;
+  font-size: 24px;
+}
+.bill-input input::-moz-placeholder {
+  color: hsl(184, 14%, 56%);
+}
+.bill-input input::placeholder {
+  color: hsl(184, 14%, 56%);
+}
+.bill-input::before {
+  content: "$";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-20%);
+  color: hsl(184, 14%, 56%);
+  font-size: 24px;
+}
+
+.tip-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.tip-buttons button, .tip-buttons .custom-tip {
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+}
+.tip-buttons .custom-tip {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .tip-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+button {
+  background-color: hsl(183, 100%, 15%);
+  color: hsl(0, 100%, 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: hsl(173, 61%, 77%);
+  color: hsl(183, 100%, 15%);
+}
+button.active {
+  background-color: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+}
+
+.custom-tip {
+  background-color: hsl(189, 47%, 97%);
+  color: hsl(183, 100%, 15%);
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+}
+.custom-tip::-moz-placeholder {
+  color: hsl(184, 14%, 56%);
+  font-size: 24px;
+  font-weight: 700;
+}
+.custom-tip::placeholder {
+  color: hsl(184, 14%, 56%);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.people-input {
+  position: relative;
+}
+.people-input input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-size: 24px;
+  text-align: right;
+  background-color: hsl(189, 47%, 97%);
+  border: none;
+  border-radius: 8px;
+  color: hsl(183, 100%, 15%);
+}
+
+.output-section {
+  background-color: hsl(183, 100%, 15%);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.result-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.result-line .label {
+  color: hsl(0, 100%, 100%);
+}
+.result-line .label span {
+  display: block;
+  color: hsl(184, 14%, 56%);
+  font-size: 0.8rem;
+}
+.result-line .amount {
+  color: hsl(172, 67%, 45%);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.reset-btn:hover {
+  background-color: hsl(173, 61%, 77%);
+}
+.reset-btn:disabled {
+  background-color: hsl(186, 14%, 43%);
+  cursor: not-allowed;
+}/*# sourceMappingURL=style.css.map */

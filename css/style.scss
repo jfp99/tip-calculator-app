@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// Colors
+$colors: (
+primary: (
+green-200: hsl(173, 61%, 77%),
+green-400: hsl(172, 67%, 45%),
+orange-400: hsl(13, 70%, 60%)
+),
+neutral: (
+green-900: hsl(183, 100%, 15%),
+grey-500: hsl(186, 14%, 43%),
+grey-400: hsl(184, 14%, 56%),
+grey-200: hsl(185, 41%, 84%),
+grey-50: hsl(189, 47%, 97%),
+white: hsl(0, 100%, 100%),
+black: hsl(0, 0%, 0%)
+)
+);
+
+// Typography
+$font-family: 'Space Mono', monospace;
+$font-weight-bold: 700;
+$font-size-inputs: 24px;
+$border-radius: 8px;
+
+@mixin flex-center {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Global
+
+
+body {
+    font-family: $font-family;
+    background-color: map-get(map-get($colors, neutral), grey-200);
+    @include flex-center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+// Calculator
+
+.calculator {
+    background-color: map-get(map-get($colors, neutral), white);
+    border-radius: $border-radius * 2;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    
+    &:hover {
+        transform: scale(1.01);
+    }
+
+    @media (max-width:768px) {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+
+    }
+}
+
+// Logo
+
+.logo {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: map-get(map-get($colors, neutral), green-900);
+    letter-spacing: 0.5rem;
+    line-height: 1.2;
+    
+    // Optional: Add some animation
+    transition: transform 0.3s;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+// Input Section
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    label {
+    color: map-get(map-get($colors, neutral), grey-500);
+    font-weight: $font-weight-bold;
+    }
+}
+
+//Bill Input
+
+.bill-input {
+    position: relative;
+
+    input {
+        width: 100%;
+        padding: 0.5rem 0.5rem;
+        background-color: map-get(map-get($colors, neutral), grey-50);
+        border: none;
+        border-radius: $border-radius;
+        color: map-get(map-get($colors, neutral), green-900);
+        text-align: right;
+        font-size: $font-size-inputs;
+
+        &::placeholder {
+            color: map-get(map-get($colors, neutral), grey-400);
+        }
+    }
+    &::before {
+        content: "$";
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-20%);
+        color: map-get(map-get($colors, neutral), grey-400);
+        font-size: $font-size-inputs;
+        }
+}
+
+// Tip buttons
+
+.tip-buttons {
+    display: grid;
+    grid-template-columns:  repeat(3, minmax(0, 1fr));
+    gap: 1rem;  
+
+    button, .custom-tip {
+    min-width: 0;
+    overflow: hidden; 
+    text-align: center;
+    }
+
+    .custom-tip {
+        width: 100%;
+        padding: 0.5rem;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+button {
+    background-color: map-get(map-get($colors, neutral), green-900);
+    color: map-get(map-get($colors, neutral), white);
+    border: none;
+    border-radius: $border-radius;
+    padding: 0.5rem;
+    font-size: $font-size-inputs;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: map-get(map-get($colors, primary), green-200);
+        color: map-get(map-get($colors, neutral), green-900);
+    }
+
+    &.active {
+        background-color: map-get(map-get($colors, primary), green-400);
+        color: map-get(map-get($colors, neutral), green-900);
+    }
+}
+
+.custom-tip {
+    background-color: map-get(map-get($colors, neutral), grey-50);
+    color: map-get(map-get($colors, neutral), green-900);
+    text-align: center;
+    border: none;
+    border-radius: $border-radius;
+
+    &::placeholder {
+            color: map-get(map-get($colors, neutral), grey-400);
+            font-size: $font-size-inputs;
+            font-weight: $font-weight-bold;
+        }
+}
+
+//People Input
+.people-input {
+    position: relative;
+
+    input {
+        padding: 0.5rem 1rem;
+        width: 100%;
+        font-size: $font-size-inputs;
+        text-align: right;
+        background-color: map-get(map-get($colors, neutral), grey-50);
+        border: none;
+        border-radius: $border-radius;
+        color: map-get(map-get($colors, neutral), green-900);
+    }
+}
+
+
+//Output Section
+.output-section {
+    background-color: map-get(map-get($colors, neutral), green-900);
+    border-radius: $border-radius;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.result-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .label {
+    color: map-get(map-get($colors, neutral), white);
+
+        span {
+        display: block;
+        color: map-get(map-get($colors, neutral), grey-400);
+        font-size: 0.8rem;
+        }
+    }
+
+    .amount {
+        color: map-get(map-get($colors, primary), green-400);
+        font-size: 2.5rem;
+        font-weight: $font-weight-bold;
+    }
+}
+
+.reset-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: map-get(map-get($colors, primary), green-400);
+    color: map-get(map-get($colors, neutral), green-900);
+    border: none;
+    border-radius: $border-radius;
+    font-size: $font-size-inputs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: map-get(map-get($colors, primary), green-200);
+    }
+
+    &:disabled {
+        background-color: map-get(map-get($colors, neutral), grey-500);
+        cursor: not-allowed;
+    }
+}
