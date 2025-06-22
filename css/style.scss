@@ -1,52 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@use 'sass:map';
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
-// Colors
+// ========== VARIABLES ==========
 $colors: (
 primary: (
-green-200: hsl(173, 61%, 77%),
-green-400: hsl(172, 67%, 45%),
-orange-400: hsl(13, 70%, 60%)
+    green-200: hsl(173, 61%, 77%),
+    green-400: hsl(172, 67%, 45%),
+    orange-400: hsl(13, 70%, 60%)
 ),
 neutral: (
-green-900: hsl(183, 100%, 15%),
-grey-500: hsl(186, 14%, 43%),
-grey-400: hsl(184, 14%, 56%),
-grey-200: hsl(185, 41%, 84%),
-grey-50: hsl(189, 47%, 97%),
-white: hsl(0, 100%, 100%),
-black: hsl(0, 0%, 0%)
+    green-900: hsl(183, 100%, 15%),
+    grey-500: hsl(186, 14%, 43%),
+    grey-400: hsl(184, 14%, 56%),
+    grey-200: hsl(185, 41%, 84%),
+    grey-50: hsl(189, 47%, 97%),
+    white: hsl(0, 100%, 100%),
+    black: hsl(0, 0%, 0%)
 )
 );
 
-// Typography
 $font-family: 'Space Mono', monospace;
 $font-weight-bold: 700;
 $font-size-inputs: 24px;
 $border-radius: 8px;
+$transition: all 0.3s ease;
 
-@mixin flex-center {    
+// ========== MIXINS ==========
+@mixin flex-center($direction: row) {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: $direction;
 }
 
-// Global
+@mixin input-styles {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: map.get($colors, neutral, grey-50);
+    border: none;
+    border-radius: $border-radius;
+    color: map.get($colors, neutral, green-900);
+    text-align: right;
+    font: {
+    size: $font-size-inputs;
+    family: $font-family;
+    weight: $font-weight-bold;
+}
 
+&::placeholder {
+    color: map.get($colors, neutral, grey-400);
+}
+}
+
+// ========== BASE STYLES ==========
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: $font-family;
-    background-color: map-get(map-get($colors, neutral), grey-200);
-    @include flex-center;
+    background-color: map.get($colors, neutral, grey-200);
+    @include flex-center(column);
     min-height: 100vh;
-    margin: 0;
     padding: 2rem;
-    flex-direction: column;
 }
 
-// Calculator
+// ========== COMPONENTS ==========
+.logo {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: map.get($colors, neutral, green-900);
+    letter-spacing: 0.5rem;
+    line-height: 1.2;
+    transition: transform 0.3s;
+
+&:hover {
+    transform: scale(1.05);
+    color: map.get($colors, neutral, grey-500);
+}
+}
 
 .calculator {
-    background-color: map-get(map-get($colors, neutral), white);
+    background-color: map.get($colors, neutral, white);
     border-radius: $border-radius * 2;
     padding: 2rem;
     width: 100%;
@@ -54,169 +91,124 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
-    
+    transition: $transition;
+
     &:hover {
         transform: scale(1.01);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
         grid-template-columns: 1fr;
         padding: 1.5rem;
+    }
 
+    @media (max-width: 320px) {
+        width: 100%;
+        min-width: 300px;
     }
 }
 
-// Logo
-
-.logo {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: map-get(map-get($colors, neutral), green-900);
-    letter-spacing: 0.5rem;
-    line-height: 1.2;
-    
-    // Optional: Add some animation
-    transition: transform 0.3s;
-    &:hover {
-        transform: scale(1.05);
-    }
-}
-
-// Input Section
 .input-section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
     label {
-    color: map-get(map-get($colors, neutral), grey-500);
-    font-weight: $font-weight-bold;
+        color: map.get($colors, neutral, grey-500);
+        font-weight: $font-weight-bold;
+        display: block;
+        margin-bottom: 0.5rem;
     }
 }
 
-//Bill Input
-
-.bill-input {
+// Input Fields
+.bill-input, .people-input {
     position: relative;
 
-    input {
-        width: 100%;
-        padding: 0.5rem 0.5rem;
-        background-color: map-get(map-get($colors, neutral), grey-50);
-        border: none;
-        border-radius: $border-radius;
-        color: map-get(map-get($colors, neutral), green-900);
-        text-align: right;
-        font-size: $font-size-inputs;
-        font-family: $font-family;
-        font-weight: $font-weight-bold;
-
-        &::placeholder {
-            color: map-get(map-get($colors, neutral), grey-400);
-        }
-    }
-    &::before {
-        content: "$";
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-20%);
-        color: map-get(map-get($colors, neutral), grey-400);
-        font-size: $font-size-inputs;
-        }
+input {
+    @include input-styles;
+    padding-left: 2.5rem;
 }
 
-// Tip buttons
+&::before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+    font-size: $font-size-inputs;
+    color: map.get($colors, neutral, grey-400);
+}
+}
 
+.bill-input::before {
+    content: "$";
+}
+
+.people-input::before {
+    content: url("/images/icon-person.svg");
+    width: 24px;
+    height: 24px;
+    padding-top: 1rem;
+}
+
+// Tip Buttons
 .tip-buttons {
     display: grid;
-    grid-template-columns:  repeat(3, minmax(0, 1fr));
-    gap: 1rem;  
-
-    button, .custom-tip {
-    min-width: 0;
-    overflow: hidden; 
-    text-align: center;
-    }
-
-    .custom-tip {
-        width: 100%;
-        padding: 0.5rem;
-        box-sizing: border-box;
-    }
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
 
     @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-}
-
-button {
-    background-color: map-get(map-get($colors, neutral), green-900);
-    color: map-get(map-get($colors, neutral), white);
-    border: none;
-    border-radius: $border-radius;
-    padding: 0.5rem;
-    font-size: $font-size-inputs;
-    font-weight: $font-weight-bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: $font-family;
-
-    &:hover {
-        background-color: map-get(map-get($colors, primary), green-200);
-        color: map-get(map-get($colors, neutral), green-900);
-    }
-
-    &.active {
-        background-color: map-get(map-get($colors, primary), green-400);
-        color: map-get(map-get($colors, neutral), green-900);
-    }
-}
-
-.custom-tip {
-    background-color: map-get(map-get($colors, neutral), grey-50);
-    color: map-get(map-get($colors, neutral), green-900);
-    text-align: center;
-    border: none;
-    border-radius: $border-radius;
-    font-family: $font-family;
-
-    &::placeholder {
-            color: map-get(map-get($colors, neutral), grey-400);
-            font-weight: $font-weight-bold;
-            text-transform: uppercase;  
-            font-family: $font-family;
-        }
-}
-
-//People Input
-.people-input {
-    position: relative;
-
-    input {
-        padding: 0.5rem  0.5rem;
-        width: 100%;
-        font-size: $font-size-inputs;
-        text-align: right;
-        background-color: map-get(map-get($colors, neutral), grey-50);
-        border: none;
+    button, .custom-tip {
+        min-width: 0;
         border-radius: $border-radius;
-        color: map-get(map-get($colors, neutral), green-900);
-        font-family: $font-family;
-        font-weight: $font-weight-bold;
+        font: {
+        size: $font-size-inputs;
+        family: $font-family;
+        weight: $font-weight-bold;
+        }
+        transition: $transition;
+    }
 
+    button {
+        background-color: map.get($colors, neutral, green-900);
+        color: map.get($colors, neutral, white);
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+        
+        &:hover, &.active {
+        background-color: map.get($colors, primary, green-400);
+        color: map.get($colors, neutral, green-900);
+        }
+    }
+
+    .custom-tip {
+        width: 100%;
+        background-color: map.get($colors, neutral, grey-50);
+        color: map.get($colors, neutral, green-900);
+        text-align: center;
+        border: 2px solid transparent;
+        
+        &:focus {
+        border-color: map.get($colors, primary, green-400);
+        outline: none;
+        }
+        
         &::placeholder {
-            color: map-get(map-get($colors, neutral), green-900);
-            font-weight: $font-weight-bold;
+        color: map.get($colors, neutral, grey-400);
+        text-transform: uppercase;
         }
     }
 }
 
-
-//Output Section
+// Output Section
 .output-section {
-    background-color: map-get(map-get($colors, neutral), green-900);
+    background-color: map.get($colors, neutral, green-900);
     border-radius: $border-radius;
     padding: 2rem;
     display: flex;
@@ -231,47 +223,53 @@ button {
     margin-bottom: 2rem;
 
     .label {
-    color: map-get(map-get($colors, neutral), white);
-
+    color: map.get($colors, neutral, white);
+    
         span {
-        display: block;
-        color: map-get(map-get($colors, neutral), grey-400);
-        font-size: 0.8rem;
+            display: block;
+            color: map.get($colors, neutral, grey-400);
+            font-size: 0.8rem;
         }
     }
 
     .amount {
-        color: map-get(map-get($colors, primary), green-400);
-        font-size: 2.5rem;
-        font-weight: $font-weight-bold;
+    color: map.get($colors, primary, green-400);
+    font-size: 2.5rem;
+    font-weight: $font-weight-bold;
     }
 }
 
 .reset-btn {
     width: 100%;
     padding: 0.5rem;
-    background-color: map-get(map-get($colors, primary), green-400);
-    color: map-get(map-get($colors, neutral), green-900);
+    background-color: map.get($colors, primary, green-400);
+    color: map.get($colors, neutral, green-900);
     border: none;
     border-radius: $border-radius;
-    font-size: $font-size-inputs;
-    font-weight: $font-weight-bold;
+font: {
+    size: $font-size-inputs;
+    weight: $font-weight-bold;
+}
     text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: $transition;
 
-    &:hover {
-        background-color: map-get(map-get($colors, primary), green-200);
+    &:hover:not(:disabled) {
+        background-color: map.get($colors, primary, green-200);
     }
 
     &:disabled {
-        background-color: map-get(map-get($colors, neutral), grey-500);
+        background-color: map.get($colors, neutral, grey-500);
         cursor: not-allowed;
+        opacity: 0.7;
     }
 }
 
 .error-message {
-    color: red;
-    padding: 1rem;
+    color: map.get($colors, primary, orange-400);
+    font-size: 0.8rem;
     visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
