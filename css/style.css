@@ -203,4 +203,10 @@ button.active {
 .reset-btn:disabled {
   background-color: hsl(186, 14%, 43%);
   cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  padding: 1rem;
+  visibility: hidden;
 }/*# sourceMappingURL=style.css.map */

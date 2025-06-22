@@ -257,3 +257,9 @@ button {
         cursor: not-allowed;
     }
 }
+
+.error-message {
+    color: red;
+    padding: 1rem;
+    visibility: hidden;
+}
