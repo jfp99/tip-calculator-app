@@ -78,7 +78,7 @@ body {
 
 &:hover {
     transform: scale(1.05);
-    color: map.get($colors, neutral, grey-500);
+    color: map.get($colors, neutral, grey-400);
 }
 }
 
@@ -143,6 +143,7 @@ input {
 
 .bill-input::before {
     content: "$";
+    padding-top: 1.5rem;
 }
 
 .people-input::before {

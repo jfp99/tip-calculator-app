@@ -26,7 +26,7 @@ body {
 }
 .logo:hover {
   transform: scale(1.05);
-  color: hsl(186, 14%, 43%);
+  color: hsl(184, 14%, 56%);
 }
 
 .calculator {
@@ -102,6 +102,7 @@ body {
 
 .bill-input::before {
   content: "$";
+  padding-top: 1.5rem;
 }
 
 .people-input::before {
